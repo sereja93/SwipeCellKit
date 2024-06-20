@@ -362,7 +362,9 @@ extension SwipeController: UIGestureRecognizerDelegate {
             let view = gestureRecognizer.view,
             let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
             let translation = gestureRecognizer.translation(in: view)
-            return abs(translation.y) <= abs(translation.x)
+            let location = gestureRecognizer.location(in: view)
+            let part = UIScreen.main.bounds.width / 4
+            return abs(translation.y) <= abs(translation.x) && (location.x < part || location.x > (UIScreen.main.bounds.width - part))
         }
         
         return true
